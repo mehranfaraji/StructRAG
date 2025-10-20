@@ -26,6 +26,21 @@ python main.py --url {url_of_api_server} # output will be in ./eval_results/qwen
 python do_merge_each_batch.py # results will be in ./Loong/output/qwen
 ```
 
+### Running StructRAG on NarrativeQA with Gemini
+
+```bash
+export GOOGLE_API_KEY="your_gemini_key"
+# Optional: export HF_TOKEN if the NarrativeQA dataset requires authentication in your environment
+python main.py \
+  --llm_name gemini \
+  --dataset_name narrativeqa \
+  --narrativeqa_limit 3 \
+  --gemini_model gemini-1.5-flash-latest \
+  --hf_token "$HF_TOKEN"
+```
+
+The script automatically downloads the first three NarrativeQA documents, keeps their unique identifiers, and stores intermediate outputs under `intermediate_results/gemini/narrativeqa`. Final responses are written to `eval_results/gemini/narrativeqa`.
+
 ## 3. Results Evaluation
 ```
 cd Loong/src && bash run.sh
